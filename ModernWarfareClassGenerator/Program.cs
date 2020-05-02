@@ -8,26 +8,30 @@ namespace ModernWarfareClassGenerator
         {
             Class class1 = new Class(Items.primary, Items.secondary, Items.perk1, Items.perk2, Items.perk3, Items.lethal, Items.tactical);
 
-            Console.WriteLine("Primary: " + class1.ReturnPrimary());
-            Console.WriteLine("Secondary: " + class1.ReturnSecondary());
-            Console.WriteLine("Perk 1: " + class1.ReturnPerk1());
-            Console.WriteLine("Perk 2: " + class1.ReturnPerk2());
-            Console.WriteLine("Perk 3: " + class1.ReturnPerk3());
-            Console.WriteLine("Lethal: " + class1.ReturnLethal());
-            Console.WriteLine("Tactical: " + class1.ReturnTactical());
+            Console.WriteLine("Primary: " + class1.GetPrimary());
+            
+            if(class1.overkill)
+            {
+                Console.WriteLine("Secondary: " + class1.GetSecondary() + " (Overkill)");
+            }
+            else
+            {
+                Console.WriteLine("Secondary: " + class1.GetSecondary());
+            }
+            
+            Console.WriteLine("Perk 1: " + class1.GetPerk1());
+            Console.WriteLine("Perk 2: " + class1.GetPerk2());
+            Console.WriteLine("Perk 3: " + class1.GetPerk3());
+            Console.WriteLine("Lethal: " + class1.GetLethal());
+            Console.WriteLine("Tactical: " + class1.GetTactical());
         }
     }
 
     class Class
     {
         Random random = new Random();
-        string primary;
-        string secondary;
-        string perk1;
-        string perk2;
-        string perk3;
-        string lethal;
-        string tactical;
+        string primary, secondary, perk1, perk2, perk3, lethal, tactical;
+        public bool overkill;
 
         public Class(string[] primaryWeapons, string[] secondaryWeapons, string[] perk1Perks, string[] perk2Perks, string[] perk3Perks, string[] lethals, string[] tacticals)
         {
@@ -41,43 +45,45 @@ namespace ModernWarfareClassGenerator
             if(perk2 == perk2Perks[2])
             {
                 secondary = primaryWeapons[random.Next(36)];
+                overkill = true;
             }
             else
             {
                 secondary = secondaryWeapons[random.Next(11)];
+                overkill = false;
             }
         }
-        public string ReturnPrimary()
+        public string GetPrimary()
         {
             return primary;
         }
 
-        public string ReturnSecondary()
+        public string GetSecondary()
         {
             return secondary;
         }
 
-        public string ReturnPerk1()
+        public string GetPerk1()
         {
             return perk1;
         }
 
-        public string ReturnPerk2()
+        public string GetPerk2()
         {
             return perk2;
         }
 
-        public string ReturnPerk3()
+        public string GetPerk3()
         {
             return perk3;
         }
 
-        public string ReturnLethal()
+        public string GetLethal()
         {
             return lethal;
         }
 
-        public string ReturnTactical()
+        public string GetTactical()
         {
             return tactical;
         }
